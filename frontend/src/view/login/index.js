@@ -12,6 +12,7 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [msgTipo, setMsgTipo] = useState('');
+  const [carregando, setCarregando] = useState(0);
 
   const { addToast } = useToasts();
 
@@ -31,10 +32,14 @@ const Login = () => {
   }
 
 
-  function Logar() {
+  function logar() {
+
+    setCarregando(1);
+
     firebase.auth().signInWithEmailAndPassword(email, senha)
       .then(response => {
 
+        setCarregando(0);
         addToast(<span>Login Realizado!</span>,
           {
             appearance: 'success',
@@ -45,13 +50,15 @@ const Login = () => {
       .catch((err) => {
 
         console.log(err.message)
-
+        setCarregando(0);
         addToast(<span>{checkMessage(err.message)}</span>,
           {
             appearance: "error",
             autoDismiss: true
           });
       })
+
+    setCarregando(0);
 
   }
 
@@ -67,7 +74,11 @@ const Login = () => {
         <label htmlFor="inputPassword" className="visually-hidden">Senha</label>
         <input type="password" id="inputPassword" onChange={(e) => setSenha(e.target.value)} className="form-control my-2" value={senha} placeholder="Senha" required />
 
-        <button onClick={Logar} className="w-100 btn btn-lg btn-login" type="button">Logar</button>
+    
+        {
+          carregando ?  <div class="spinner-border mt-3 mb-5 text-primary" role="status"><span class="sr-only"></span></div>
+          : <button onClick={logar} className="w-100 btn btn-lg btn-login" type="button">Logar</button>
+        }
 
 
 
