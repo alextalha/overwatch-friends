@@ -1,5 +1,6 @@
 const axios = require('axios')
 
+// https://ow-api.com/docs/#complete-stats
 module.exports = {
 
   async stats(request, response) {
