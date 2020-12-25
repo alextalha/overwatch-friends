@@ -1,13 +1,13 @@
 import './App.css';
 
-import Login from './view/login'
+import Routes from './routes';
 import { ToastProvider } from 'react-toast-notifications';
 
 function App() {
   return (
     <div className="App">
       <ToastProvider>
-        <Login />
+        <Routes />
       </ToastProvider>
     </div>
   );

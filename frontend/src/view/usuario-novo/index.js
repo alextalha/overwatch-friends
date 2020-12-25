@@ -15,17 +15,12 @@ const NovoUsuario = () => {
   const [msg, setMsg] = useState('');
   const [carregando, setCarregando] = useState(0);
 
-
   const { addToast } = useToasts();
-
-
 
   function cadastrar() {
     
     setCarregando(1)
-
     setMsgTipo(null)
-
 
     if (!email || !senha) {
 
@@ -73,7 +68,6 @@ const NovoUsuario = () => {
         });
     })
 
-
   }
 
   return (
@@ -89,12 +83,9 @@ const NovoUsuario = () => {
           : <button onClick={cadastrar} type="button" className="btn btn-lg btn-block mt-3 mb-5 btn-cadastro">Cadastrar</button>
         }
        
-
-   
       </form>
     </div>
   )
 }
-
 
 export default NovoUsuario

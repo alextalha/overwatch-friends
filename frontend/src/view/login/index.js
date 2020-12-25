@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import './login.css';
 
+import { Link } from 'react-router-dom';
+
+
 import firebase from '../../config/firebase';
 import 'firebase/auth';
 
@@ -74,17 +77,14 @@ const Login = () => {
         <label htmlFor="inputPassword" className="visually-hidden">Senha</label>
         <input type="password" id="inputPassword" onChange={(e) => setSenha(e.target.value)} className="form-control my-2" value={senha} placeholder="Senha" required />
 
-    
         {
-          carregando ?  <div class="spinner-border mt-3 mb-5 text-primary" role="status"><span class="sr-only"></span></div>
-          : <button onClick={logar} className="w-100 btn btn-lg btn-login" type="button">Logar</button>
+          carregando ? <div class="spinner-border mt-3 mb-5 text-primary" role="status"><span class="sr-only"></span></div>
+            : <button onClick={logar} className="w-100 btn btn-lg btn-login" type="button">Logar</button>
         }
-
-
 
         <div className="opcoes-login">
           <a href="#" className="mx-2">Recuperar Senha</a>
-          <a href="#" className="mx-2">Quero Cadastrar</a>
+          <Link to='cadastro' className="mx-2">Quero Cadastrar</Link>
 
           <p className="mt-5 mb-3 text-muted text-white">&copy; Overwatch-Friends 2020-2021</p>
         </div>
@@ -92,7 +92,6 @@ const Login = () => {
 
     </div>
   );
-
 
 }
 
