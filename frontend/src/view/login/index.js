@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import './login.css';
 
-import { Link } from 'react-router-dom';
-
+import { Link, Redirect } from 'react-router-dom';
 
 import firebase from '../../config/firebase';
 import 'firebase/auth';
 
 import { useToasts } from 'react-toast-notifications'
+
+import { useSelector, useDispatch } from 'react-redux';
+
 
 const Login = () => {
 
@@ -19,36 +21,41 @@ const Login = () => {
 
   const { addToast } = useToasts();
 
+  const dispatch = useDispatch();
+
   function checkMessage(message) {
 
-    if (message == 'There is no user record corresponding to this identifier. The user may have been deleted.') {
+    if (message === 'There is no user record corresponding to this identifier. The user may have been deleted.') {
       return "Nenhum usuário encontrado para este email";
     }
 
-    if (message == 'The email address is badly formatted.') {
+    if (message === 'The email address is badly formatted.') {
       return "Padrão de email inválido";
     }
 
-    if (message == 'The password is invalid or the user does not have a password.')
+    if (message === 'The password is invalid or the user does not have a password.')
       return "Senha Inválida";
 
   }
 
 
-  function logar() {
+  function Logar() {
 
     setCarregando(1);
-
     firebase.auth().signInWithEmailAndPassword(email, senha)
       .then(response => {
 
-        setCarregando(0);
         addToast(<span>Login Realizado!</span>,
           {
             appearance: 'success',
             autoDismiss: true,
           });
 
+        setTimeout(() => {
+          setCarregando(0);
+          dispatch({ type: 'LOG_IN', usuarioEmail: email })
+
+        }, 3000);
       })
       .catch((err) => {
 
@@ -61,12 +68,21 @@ const Login = () => {
           });
       })
 
+
+
     setCarregando(0);
 
   }
 
   return (
+
+  
     <div className="login-content d-flex align-items-center">
+    
+    {
+      useSelector(state => state.usuarioLogado) > 0 ? <Redirect to='/' /> : "" 
+    }
+
       <form className="form-signin mx-auto">
         <img className="mb-4" src="/overwatch-logo.svg" alt="" width="50" height="50" />
         <h1 className="h3 mb-3 fw-normal text-white">Login</h1>
@@ -79,7 +95,7 @@ const Login = () => {
 
         {
           carregando ? <div class="spinner-border mt-3 mb-5 text-primary" role="status"><span class="sr-only"></span></div>
-            : <button onClick={logar} className="w-100 btn btn-lg btn-login" type="button">Logar</button>
+            : <button onClick={Logar} className="w-100 btn btn-lg btn-login" type="button">Logar</button>
         }
 
         <div className="opcoes-login">

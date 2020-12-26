@@ -26,7 +26,7 @@ const NavBar = () => {
               <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 <a className="dropdown-item" href="#">Meus Dados</a>
                 <a className="dropdown-item" href="#">Meu DashBoard</a>
-                <a className="dropdown-item" href="#">Sair</a>
+                <Link className="dropdown-item" to="/login">Sair</Link>
               </div>
             </li>
           </ul>
