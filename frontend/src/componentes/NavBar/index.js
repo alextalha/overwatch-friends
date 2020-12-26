@@ -19,16 +19,21 @@ const NavBar = () => {
             <li className="nav-item">
               <a className="nav-link" href="#">Chat</a>
             </li>
+
             <li className="nav-item dropdown">
-              <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                 Configuração 
               </a>
-              <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a className="dropdown-item" href="#">Meus Dados</a>
+
+              <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <Link className="dropdown-item" to="/perfil">Perfil</Link>
                 <a className="dropdown-item" href="#">Meu DashBoard</a>
+                <Link className="dropdown-item" to="/recuperar-senha">Redefinir Senha</Link>
                 <Link className="dropdown-item" to="/login">Sair</Link>
-              </div>
+              </ul>
             </li>
+
+
           </ul>
         </div>
       </nav>
