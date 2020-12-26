@@ -8,7 +8,7 @@ const NavBar = () => {
     <>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <Link className="navbar-brand" to="/home"> <img className="" src="/overwatch-logo.svg" alt="" width="50" height="50" /> Friends</Link>
-        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarNavDropdown">
@@ -19,21 +19,18 @@ const NavBar = () => {
             <li className="nav-item">
               <a className="nav-link" href="#">Chat</a>
             </li>
-
             <li className="nav-item dropdown">
-              <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+              <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Configuração 
               </a>
-
-              <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 <Link className="dropdown-item" to="/perfil">Perfil</Link>
                 <a className="dropdown-item" href="#">Meu DashBoard</a>
                 <Link className="dropdown-item" to="/recuperar-senha">Redefinir Senha</Link>
+
                 <Link className="dropdown-item" to="/login">Sair</Link>
-              </ul>
+              </div>
             </li>
-
-
           </ul>
         </div>
       </nav>
