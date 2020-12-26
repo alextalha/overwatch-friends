@@ -99,8 +99,8 @@ const Login = () => {
         }
 
         <div className="opcoes-login">
-          <a href="#" className="mx-2">Recuperar Senha</a>
-          <Link to='cadastro' className="mx-2">Quero Cadastrar</Link>
+          <Link to="/recuperar-senha" className="mx-2">Recuperar Senha</Link>
+          <Link to='/cadastro' className="mx-2">Quero Cadastrar</Link>
 
           <p className="mt-5 mb-3 text-muted text-white">&copy; Overwatch-Friends 2020-2021</p>
         </div>
