@@ -44,6 +44,32 @@ export async function apiCidades(id_estado) {
 
 }
 
-export default { apiEstados, apiCidades };
+
+export async function apiBairros(id_cidade) {
+
+  const bairros = localStorage.getItem('bairros');
+  const id_cidade_session = localStorage.getItem('id_cidade');
+
+  console.log('id_cidade_session', id_cidade_session)
+  console.log('id_cidade', id_cidade)
+
+  if (!id_cidade !== id_cidade_session) {
+
+    console.log('renew bairros');
+    const response = await axios.get(`http://www.geonames.org/childrenJSON?geonameId=${id_cidade}`)
+    const data = await response.data;
+
+    localStorage.setItem('id_cidade', id_cidade);
+    localStorage.setItem('bairros', JSON.stringify(data));
+    return JSON.parse(localStorage.getItem('bairros'));
+
+  } else {
+
+    return JSON.parse(bairros);
+  }
+
+}
+
+export default { apiEstados, apiCidades, apiBairros };
 
 

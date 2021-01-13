@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import NavBar from '../../componentes/NavBar';
 import { useSelector } from 'react-redux';
 
-import { apiEstados, apiCidades } from '../../services/api-localizacao';
+import { apiEstados, apiCidades, apiBairros } from '../../services/api-localizacao';
 
 const Home = () => {
 
@@ -13,12 +13,15 @@ const Home = () => {
   const [battletag, setBattletag] = useState('');
   const [estados, setEstados] = useState([])
   const [cidades, setCidades] = useState([])
+  const [bairros, setBairros] = useState([])
+
 
   useEffect(() => {
+
     apiEstados()
       .then(estados => {
-
-        setEstados(estados);
+        console.log('estados *******************',estados)
+        setEstados(estados.geonames);
       })
       .catch(err => console.log(err))
 
@@ -34,11 +37,26 @@ const Home = () => {
 
     apiCidades(option)
       .then(cidades => {
-        console.log(cidades)
-        setCidades(cidades)
+        console.log('cidades *******************',cidades)
+        setCidades(cidades.geonames)
       })
       .catch(err => console.log(err))
+  }
 
+
+  function handleBairrosOption(event) {
+
+    const index = event.target.selectedIndex;
+    const optionElement = event.target.childNodes[index];
+    const option = optionElement.getAttribute('data-id');
+    console.log('bairro id', option);
+
+    apiBairros(option)
+      .then(bairro => {
+        console.log('bairros *******************',bairro)
+        setBairros(bairro.geonames)
+      })
+      .catch(err => console.log(err))
   }
 
   return (
@@ -77,21 +95,20 @@ const Home = () => {
               <label for="state" class="form-label">Estado</label>
               <select onChange={(e) => handleCityOption(e)} class="form-select" id="state" required>
                 <option value>-</option>
-                {estados && estados?.geonames.map(estado => {
+                {estados
+                  ? estados?.map(estado => {
                   return <option key={estado.adminCode1} data-id={estado.geonameId} value={estado.adminCodes1["ISO3166_2"]}>{estado.adminName1}</option>
                 })
-
-                }
-
+                : "Loading..."}
 
               </select>
             </div>
 
             <div className="col-md-4 ">
               <label for="state" class="form-label">Cidade</label>
-              <select class="form-select" id="city" required>
+              <select onChange={(e) => handleBairrosOption(e)} class="form-select" id="bairro" required>
                 <option value>-</option>
-                {cidades && cidades?.geonames.map(cidade => {
+                {cidades && cidades?.map(cidade => {
                   return <option key={cidade.toponymName} data-id={cidade.geonameId} value={cidade.adminCodes1["ISO3166_2"]}>{cidade.name}</option>
                 })
 
@@ -103,7 +120,11 @@ const Home = () => {
               <label for="state" class="form-label">Bairro</label>
               <select class="form-select" id="city" required>
                 <option value>-</option>
-                <option value="Coelho Neto">Coelho Neto</option>
+                {bairros
+                  ? bairros?.map(bairro => {
+                  return <option key={bairro.adminCode1} data-id={bairro.geonameId} value={bairro.adminCodes1["ISO3166_2"]}>{bairro.toponymName}</option>
+                })
+                : "Loading..."}
               </select>
             </div>
           </div>
