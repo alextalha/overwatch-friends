@@ -6,6 +6,7 @@ import Cadastro from './view/usuario-novo'
 import Home from './view/home'
 import RecuperarSenha from './view/recuperar-senha'
 import Perfil from './view/perfil'
+import Streamers from './view/streamers'
 
 export default function Routes() {
   return (
@@ -16,6 +17,7 @@ export default function Routes() {
         <Route path="/cadastro" component={Cadastro} />
         <Route path="/recuperar-senha" component={RecuperarSenha} />
         <Route path="/perfil" component={Perfil} />
+        <Route path="/streamers" component={Streamers} />
 
       </Switch>
     </BrowserRouter>

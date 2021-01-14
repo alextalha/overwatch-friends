@@ -1,0 +1,31 @@
+
+sudo apt-get install -f
+
+sudo apt install mysql-server
+npm install mysql2
+npm install sequelize sequelize-cli
+npx sequelize-cli init
+
+mysql -u root -p
+
+
+mudança. vamos usar o knex como orm
+
+http://abneroliveira.eti.br/omnistack11-backend-da-aplicacao-com-node-e-express-dia-02/
+
+https://guiadoprogramador.com/
+
+
+npx knex init  
+
+npx knex migrate:make create_table_users
+
+depois de criar as migrates
+
+npx knex migrate:latest
+
+
+# criando seeds pra cadastro automatizado de dados
+
+npx knex seed:make 001_users
+npx knex seed:run
